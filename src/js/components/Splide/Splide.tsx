@@ -33,6 +33,10 @@ export const Splide: React.FC<SplideProps> = (props) => {
       bind(newSplide);
       newSplide.mount(extensions, transition);
 
+      if (props.ref) {
+        props.ref.current = newSplide;
+      }
+
       setSplide(newSplide);
       setCurrentOptions(merge({}, options || {}));
       setSlides(getSlides(newSplide));
@@ -98,7 +102,7 @@ export const Splide: React.FC<SplideProps> = (props) => {
     <Root
       className={classNames('splide', className)}
       ref={splideRef}
-      {...omit(restProps, ['options', ...EVENTS.map(event => event[1])])}
+      {...omit(restProps, ['options', 'ref', ...EVENTS.map(event => event[1])])}
     >
       {hasTrack ? <SplideTrack>{children}</SplideTrack> : children}
     </Root>

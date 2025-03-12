@@ -2682,6 +2682,9 @@ var Splide2 = (props) => {
       const newSplide = new Splide(current, options);
       bind(newSplide);
       newSplide.mount(extensions, transition);
+      if (props.ref) {
+        props.ref.current = newSplide;
+      }
       setSplide(newSplide);
       setCurrentOptions(merge2({}, options || {}));
       setSlides(getSlides(newSplide));
@@ -2738,7 +2741,7 @@ var Splide2 = (props) => {
     {
       className: classNames("splide", className),
       ref: splideRef,
-      ...omit2(restProps, ["options", ...EVENTS.map((event) => event[1])])
+      ...omit2(restProps, ["options", "ref", ...EVENTS.map((event) => event[1])])
     },
     hasTrack ? /* @__PURE__ */ React2.createElement(SplideTrack, null, children2) : children2
   );
