@@ -1,6 +1,10 @@
 node_modules/
 images/
 examples/
+src/
+scripts/
+tsconfig.json
+.eslintrc
 .idea/
 .github/
 .editorconfig

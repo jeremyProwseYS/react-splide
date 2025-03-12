@@ -1,21 +1,13 @@
 {
   "compilerOptions": {
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"strict": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-    "lib": [
-      "dom",
-      "es6"
-    ],
-		"jsx": "react"
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["dom", "es6"],
+    "jsx": "react"
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/js/**/*.test.ts"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "src/**/*.test.ts"]
 }

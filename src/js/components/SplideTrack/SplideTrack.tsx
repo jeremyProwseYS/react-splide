@@ -1,5 +1,5 @@
-import React from 'react';
-import { classNames } from '../../utils';
+import React, { JSX } from 'react';
+import { classNames } from '@/utils';
 
 
 /**
@@ -7,11 +7,11 @@ import { classNames } from '../../utils';
  *
  * @since 0.7.0
  */
-export const SplideTrack: React.FC<JSX.IntrinsicElements[ 'div' ]> = ( { children, className, ...props } ) => {
+export const SplideTrack: React.FC<JSX.IntrinsicElements['div']> = ({ children, className, ...props }) => {
   return (
-    <div className={ classNames( 'splide__track', className ) } { ...props }>
+    <div className={classNames('splide__track', className)} {...props}>
       <ul className="splide__list">
-        { children }
+        {children}
       </ul>
     </div>
   );

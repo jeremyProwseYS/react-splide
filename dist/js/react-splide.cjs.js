@@ -18,19 +18,23 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/js/index.ts
-var js_exports = {};
-__export(js_exports, {
+var index_exports = {};
+__export(index_exports, {
   Splide: () => Splide2,
   SplideSlide: () => SplideSlide,
   SplideTrack: () => SplideTrack
 });
-module.exports = __toCommonJS(js_exports);
+module.exports = __toCommonJS(index_exports);
 
 // node_modules/@splidejs/splide/dist/js/splide.esm.js
 function _defineProperties(target, props) {
@@ -38,16 +42,13 @@ function _defineProperties(target, props) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
+    if ("value" in descriptor) descriptor.writable = true;
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
 function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties(Constructor, staticProps);
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
@@ -2703,110 +2704,96 @@ function merge2(object, source) {
 // src/js/components/SplideTrack/SplideTrack.tsx
 var import_react = __toESM(require("react"));
 var SplideTrack = ({ children: children2, className, ...props }) => {
-  return /* @__PURE__ */ import_react.default.createElement("div", {
-    className: classNames("splide__track", className),
-    ...props
-  }, /* @__PURE__ */ import_react.default.createElement("ul", {
-    className: "splide__list"
-  }, children2));
+  return /* @__PURE__ */ import_react.default.createElement("div", { className: classNames("splide__track", className), ...props }, /* @__PURE__ */ import_react.default.createElement("ul", { className: "splide__list" }, children2));
 };
 
 // src/js/components/Splide/Splide.tsx
-var Splide2 = class extends import_react2.default.Component {
-  constructor() {
-    super(...arguments);
-    this.splideRef = import_react2.default.createRef();
-    this.slides = [];
-  }
-  componentDidMount() {
-    const { options, extensions, transition } = this.props;
-    const { current } = this.splideRef;
+var Splide2 = (props) => {
+  const { options, extensions, transition, className, tag: Root = "div", hasTrack = true, children: children2, ...restProps } = props;
+  const splideRef = (0, import_react2.useRef)(null);
+  const [splide, setSplide] = (0, import_react2.useState)(void 0);
+  const [currentOptions, setCurrentOptions] = (0, import_react2.useState)(void 0);
+  const [slides, setSlides] = (0, import_react2.useState)([]);
+  (0, import_react2.useEffect)(() => {
+    const { current } = splideRef;
     if (current) {
-      this.splide = new Splide(current, options);
-      this.bind(this.splide);
-      this.splide.mount(extensions, transition);
-      this.options = merge2({}, options || {});
-      this.slides = this.getSlides();
+      const newSplide = new Splide(current, options);
+      bind(newSplide);
+      newSplide.mount(extensions, transition);
+      setSplide(newSplide);
+      setCurrentOptions(merge2({}, options || {}));
+      setSlides(getSlides(newSplide));
     }
-  }
-  componentWillUnmount() {
-    if (this.splide) {
-      this.splide.destroy();
-      this.splide = void 0;
-    }
-    this.options = void 0;
-    this.slides.length = 0;
-  }
-  componentDidUpdate() {
-    if (!this.splide) {
+    return () => {
+      if (splide) {
+        splide.destroy();
+        setSplide(void 0);
+      }
+      setCurrentOptions(void 0);
+      setSlides([]);
+    };
+  }, []);
+  (0, import_react2.useEffect)(() => {
+    if (!splide) {
       return;
     }
-    const { options } = this.props;
-    if (options && !isEqualDeep(this.options, options)) {
-      this.splide.options = options;
-      this.options = merge2({}, options);
+    if (options && !isEqualDeep(currentOptions, options)) {
+      splide.options = options;
+      setCurrentOptions(merge2({}, options));
     }
-    const newSlides = this.getSlides();
-    if (!isEqualShallow(this.slides, newSlides)) {
-      this.splide.refresh();
-      this.slides = newSlides;
+    const newSlides = getSlides(splide);
+    if (!isEqualShallow(slides, newSlides)) {
+      splide.refresh();
+      setSlides(newSlides);
     }
-  }
-  sync(splide) {
+  }, [options, slides, splide]);
+  const getSlides = (splideInstance) => {
     var _a;
-    (_a = this.splide) == null ? void 0 : _a.sync(splide);
-  }
-  go(control) {
-    var _a;
-    (_a = this.splide) == null ? void 0 : _a.go(control);
-  }
-  getSlides() {
-    var _a;
-    if (this.splide) {
-      const children2 = (_a = this.splide.Components.Elements) == null ? void 0 : _a.list.children;
-      return children2 && Array.prototype.slice.call(children2) || [];
-    }
-    return [];
-  }
-  bind(splide) {
+    const children3 = (_a = splideInstance.Components.Elements) == null ? void 0 : _a.list.children;
+    return children3 ? Array.prototype.slice.call(children3) : [];
+  };
+  const bind = (splideInstance) => {
     EVENTS.forEach(([event, name]) => {
-      const handler = this.props[name];
+      const handler = props[name];
       if (typeof handler === "function") {
-        splide.on(event, (...args) => {
-          handler(splide, ...args);
+        splideInstance.on(event, (...args) => {
+          handler(splideInstance, ...args);
         });
       }
     });
-  }
-  omit(props, keys) {
+  };
+  const omit2 = (props2, keys) => {
+    const result = { ...props2 };
     keys.forEach((key) => {
-      if (Object.prototype.hasOwnProperty.call(props, key)) {
-        delete props[key];
+      if (Object.prototype.hasOwnProperty.call(result, key)) {
+        delete result[key];
       }
     });
-    return props;
-  }
-  render() {
-    const { className, tag: Root = "div", hasTrack = true, children: children2, ...props } = this.props;
-    return /* @__PURE__ */ import_react2.default.createElement(Root, {
+    return result;
+  };
+  return /* @__PURE__ */ import_react2.default.createElement(
+    Root,
+    {
       className: classNames("splide", className),
-      ref: this.splideRef,
-      ...this.omit(props, ["options", ...EVENTS.map((event) => event[1])])
-    }, hasTrack ? /* @__PURE__ */ import_react2.default.createElement(SplideTrack, null, children2) : children2);
-  }
+      ref: splideRef,
+      ...omit2(restProps, ["options", ...EVENTS.map((event) => event[1])])
+    },
+    hasTrack ? /* @__PURE__ */ import_react2.default.createElement(SplideTrack, null, children2) : children2
+  );
 };
 
 // src/js/components/SplideSlide/SplideSlide.tsx
 var import_react3 = __toESM(require("react"));
 var SplideSlide = ({ children: children2, className, ...props }) => {
-  return /* @__PURE__ */ import_react3.default.createElement("li", {
-    className: classNames("splide__slide", className),
-    ...props
-  }, children2);
+  return /* @__PURE__ */ import_react3.default.createElement("li", { className: classNames("splide__slide", className), ...props }, children2);
 };
-/*!
- * Splide.js
- * Version  : 4.1.3
- * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
- */
+/*! Bundled license information:
+
+@splidejs/splide/dist/js/splide.esm.js:
+  (*!
+   * Splide.js
+   * Version  : 4.1.4
+   * License  : MIT
+   * Copyright: 2022 Naotoshi Fujita
+   *)
+*/

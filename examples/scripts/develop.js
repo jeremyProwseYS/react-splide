@@ -1,9 +1,8 @@
-const chokidar         = require( 'chokidar' );
-const { buildExample } = require( './build-example' );
+const chokidar = require("chokidar");
+const { buildExample } = require("./build-example");
 
-
-chokidar.watch( [ './src/js/**/*.tsx', './src/js/**/*.ts' ] ).on( 'change', async () => {
-  console.log( 'Building App...' );
+chokidar.watch(["./src/**/*.tsx", "./src/**/*.ts"]).on("change", async () => {
+  console.log("Building App...");
   await buildExample();
-  console.log( 'Finished' );
-} );
+  console.log("Finished");
+});

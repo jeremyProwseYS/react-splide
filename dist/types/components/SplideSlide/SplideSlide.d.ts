@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 /**
  * The component for each slide element.
  *
