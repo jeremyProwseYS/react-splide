@@ -1,3 +1,3 @@
-export { Splide } from "@/components/Splide/Splide";
-export { SplideTrack } from "@/components/SplideTrack/SplideTrack";
-export { SplideSlide } from "@/components/SplideSlide/SplideSlide";
+export { Splide } from "./Splide/Splide";
+export { SplideTrack } from "./SplideTrack/SplideTrack";
+export { SplideSlide } from "./SplideSlide/SplideSlide";

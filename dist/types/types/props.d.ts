@@ -1,6 +1,6 @@
-import { ComponentConstructor, Options } from '@splidejs/splide';
-import React, { DOMAttributes, HTMLAttributes } from 'react';
-import { SplideEventHandlers } from './events';
+import { ComponentConstructor, Options } from "@splidejs/splide";
+import React, { DOMAttributes, HTMLAttributes } from "react";
+import { SplideEventHandlers } from "@/types/events";
 /**
  * Properties of the Splide component.
  *
@@ -9,7 +9,7 @@ import { SplideEventHandlers } from './events';
 export interface SplideProps extends SplideHTMLAttributes, Partial<SplideEventHandlers> {
     options?: Options;
     hasTrack?: boolean;
-    tag?: 'div' | 'section' | 'header' | 'footer' | 'nav';
+    tag?: "div" | "section" | "header" | "footer" | "nav";
     extensions?: Record<string, ComponentConstructor>;
     transition?: ComponentConstructor;
     children?: React.ReactNode;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SplideProps } from '@/types';
+import { SplideProps } from '../../types';
 /**
  * The functional component for the Splide React node.
  *

@@ -1,8 +1,7 @@
-const fs = require( 'fs' ).promises;
-
+const fs = require("fs").promises;
 
 async function clean() {
-  await fs.rm( './dist/types', { recursive: true, force: true } );
+  await fs.rm("./dist/types", { recursive: true, force: true });
 }
 
-clean().catch( console.error );
+clean().catch(console.error);

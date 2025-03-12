@@ -1,7 +1,6 @@
 import React, { JSX } from 'react';
 import { classNames } from '@/utils';
 
-
 /**
  * The component for the track element.
  *

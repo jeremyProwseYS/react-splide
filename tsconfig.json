@@ -12,8 +12,9 @@
     "declarationMap": true,
     "lib": ["dom", "es6"],
     "jsx": "react",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/js/*"]
+      "@/*": ["js/*"]
     }
   },
   "include": ["src/js/**/*.ts"],

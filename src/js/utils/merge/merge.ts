@@ -1,6 +1,5 @@
-import { forOwn } from '../forOwn/forOwn';
-import { isObject } from '../isObject/isObject';
-
+import { forOwn } from "@/utils/forOwn/forOwn";
+import { isObject } from "@/utils/isObject/isObject";
 
 /**
  * Merges U to T.
@@ -11,13 +10,15 @@ import { isObject } from '../isObject/isObject';
  * @return An merged object type.
  */
 export type Merge<T extends object, U extends object> = Omit<T, keyof U> & {
-  [ K in ( keyof T & keyof U ) ]: U[ K ] extends object
-    ? U[ K ] extends any[]
-      ? U[ K ]
-      : T[ K ] extends object
-        ? Merge<T[ K ], U[ K ]> extends infer A ? Cast<A, object> : never
-        : U[ K ]
-    : U[ K ];
+  [K in keyof T & keyof U]: U[K] extends object
+    ? U[K] extends any[]
+      ? U[K]
+      : T[K] extends object
+      ? Merge<T[K], U[K]> extends infer A
+        ? Cast<A, object>
+        : never
+      : U[K]
+    : U[K];
 } & Omit<U, keyof T>;
 
 type Cast<T, U> = T extends U ? T : U;
@@ -31,18 +32,21 @@ type Cast<T, U> = T extends U ? T : U;
  *
  * @return A new object with merged properties.
  */
-export function merge<T extends object, U extends object>( object: T, source: U ): Merge<T, U> {
+export function merge<T extends object, U extends object>(
+  object: T,
+  source: U
+): Merge<T, U> {
   const merged = object as any;
 
-  forOwn( source, ( value, key ) => {
-    if ( Array.isArray( value ) ) {
-      merged[ key ] = value.slice();
-    } else if ( isObject( value ) ) {
-      merged[ key ] = merge( isObject( merged[ key ] ) ? merged[ key ] : {}, value );
+  forOwn(source, (value, key) => {
+    if (Array.isArray(value)) {
+      merged[key] = value.slice();
+    } else if (isObject(value)) {
+      merged[key] = merge(isObject(merged[key]) ? merged[key] : {}, value);
     } else {
-      merged[ key ] = value;
+      merged[key] = value;
     }
-  } );
+  });
 
   return merged as Merge<T, U>;
 }

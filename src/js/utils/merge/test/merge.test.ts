@@ -1,4 +1,4 @@
-import { merge } from "./merge";
+import { merge } from "../merge";
 
 describe("merge", () => {
   test("can merge 2 objects.", () => {

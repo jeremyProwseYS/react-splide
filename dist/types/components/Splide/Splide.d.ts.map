@@ -1,1 +1,1 @@
-{"version":3,"file":"Splide.d.ts","sourceRoot":"","sources":["Splide.tsx"],"names":[],"mappings":"AAEA,OAAO,KAAsC,MAAM,OAAO,CAAC;AAS3D,OAAO,EAAE,WAAW,EAAE,MAAM,SAAS,CAAC;AAGtC;;;;GAIG;AACH,eAAO,MAAM,MAAM,EAAE,KAAK,CAAC,EAAE,CAAC,WAAW,CAsFxC,CAAC"}
+{"version":3,"file":"Splide.d.ts","sourceRoot":"","sources":["Splide.tsx"],"names":[],"mappings":"AAEA,OAAO,KAAsC,MAAM,OAAO,CAAC;AAS3D,OAAO,EAAE,WAAW,EAAE,MAAM,aAAa,CAAC;AAG1C;;;;GAIG;AACH,eAAO,MAAM,MAAM,EAAE,KAAK,CAAC,EAAE,CAAC,WAAW,CAsFxC,CAAC"}

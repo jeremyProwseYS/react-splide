@@ -7,7 +7,7 @@
  * @return An merged object type.
  */
 export type Merge<T extends object, U extends object> = Omit<T, keyof U> & {
-    [K in (keyof T & keyof U)]: U[K] extends object ? U[K] extends any[] ? U[K] : T[K] extends object ? Merge<T[K], U[K]> extends infer A ? Cast<A, object> : never : U[K] : U[K];
+    [K in keyof T & keyof U]: U[K] extends object ? U[K] extends any[] ? U[K] : T[K] extends object ? Merge<T[K], U[K]> extends infer A ? Cast<A, object> : never : U[K] : U[K];
 } & Omit<U, keyof T>;
 type Cast<T, U> = T extends U ? T : U;
 /**

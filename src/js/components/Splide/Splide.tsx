@@ -9,7 +9,7 @@ import { EVENTS } from '@/constants/events';
 import { classNames, isEqualDeep, isEqualShallow, merge } from '@/utils';
 
 // Components
-import { SplideProps } from '@/types';
+import { SplideProps } from '../../types';
 import { SplideTrack } from '@/components/SplideTrack/SplideTrack';
 
 /**
