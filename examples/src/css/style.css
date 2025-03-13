@@ -1,8 +1,9 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-button, input {
+button,
+input {
   font-family: inherit;
 }
 
@@ -31,7 +32,7 @@ label span {
 }
 
 .splide__slide {
-  background: #eee;
+  background: linear-gradient(0deg, #87de1d, #b4e900);
 }
 
 .splide__slide img {

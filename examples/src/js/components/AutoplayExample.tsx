@@ -2,32 +2,31 @@ import React from 'react';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { generateSlides } from '../utils';
 
-
-export const AutoplayExample: React.VoidFunctionComponent = () => {
+export const AutoplayExample: React.FC = () => {
   const options = {
-    type         : 'loop',
-    gap          : '1rem',
-    autoplay     : true,
-    pauseOnHover : false,
+    type: 'loop',
+    gap: '1rem',
+    autoplay: true,
+    pauseOnHover: false,
     resetProgress: false,
-    height       : '15rem',
+    height: '15rem',
   };
 
   return (
     <div className="wrapper">
       <h2 id="autoplay-example-heading">Autoplay</h2>
       <Splide
-        options={ options }
+        options={options}
         aria-labelledby="autoplay-example-heading"
-        hasTrack={ false }
+        hasTrack={false}
       >
-        <div style={ { position: 'relative' } }>
+        <div style={{ position: 'relative' }}>
           <SplideTrack>
-            { generateSlides().map( slide => (
-              <SplideSlide key={ slide.src }>
-                <img src={ slide.src } alt={ slide.alt }/>
+            {generateSlides().map(slide => (
+              <SplideSlide key={slide.src}>
+                {/* <img src={slide.src} alt={slide.alt} /> */}
               </SplideSlide>
-            ) ) }
+            ))}
           </SplideTrack>
         </div>
 

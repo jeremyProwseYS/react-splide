@@ -1,29 +1,33 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { AutoplayExample } from './components/AutoplayExample';
+import { createRoot } from 'react-dom/client';
 import { BasicExample } from './components/BasicExample';
+import { AutoplayExample } from './components/AutoplayExample';
 import { DynamicSlidesExample } from './components/DynamicSlidesExample';
 import { ReactivityExample } from './components/ReactivityExample';
 import { ThumbnailsExample } from './components/ThumbnailsExample';
 import '@splidejs/react-splide/css';
 import '../css/style.css';
 
-
 /**
  * The test application.
  */
-const App: React.VoidFunctionComponent = () => {
+const App: React.FC = () => {
   return (
     <div className="examples">
-      <BasicExample/>
-      <AutoplayExample/>
-      <ReactivityExample/>
-      <DynamicSlidesExample/>
-      <ThumbnailsExample/>
+      <BasicExample />
+      <AutoplayExample />
+      <ReactivityExample />
+      <DynamicSlidesExample />
+      <ThumbnailsExample />
     </div>
   );
 };
 
-document.addEventListener( 'DOMContentLoaded', () => {
-  render( <App/>, document.getElementById( 'app' ) );
-} );
+const domNode = document.getElementById('app');
+
+if (domNode === null) {
+  console.error('The app element is not found.');
+} else {
+  const root = createRoot(domNode);
+  root.render(<App />);
+}

@@ -1,2 +1,2 @@
-export * from "@/types/props";
-export * from "@/types/events";
+export * from "./props";
+export * from "./events";

@@ -1,3 +1,3 @@
-export * from "@/types/props";
-export * from "@/types/events";
+export * from "./props";
+export * from "./events";
 //# sourceMappingURL=../../../src/js/types/index.d.ts.map

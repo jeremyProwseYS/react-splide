@@ -1,1 +1,1 @@
-{"version":3,"file":"SplideTrack.d.ts","sourceRoot":"","sources":["SplideTrack.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,GAAG,EAAE,MAAM,OAAO,CAAC;AAGnC;;;;GAIG;AACH,eAAO,MAAM,WAAW,EAAE,KAAK,CAAC,EAAE,CAAC,GAAG,CAAC,iBAAiB,CAAC,KAAK,CAAC,CAQ9D,CAAC"}
+{"version":3,"file":"SplideTrack.d.ts","sourceRoot":"","sources":["SplideTrack.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,GAAG,EAAE,MAAM,OAAO,CAAC;AAGnC;;;;GAIG;AACH,eAAO,MAAM,WAAW,EAAE,KAAK,CAAC,EAAE,CAAC,GAAG,CAAC,iBAAiB,CAAC,KAAK,CAAC,CAQ9D,CAAC;AAEF,eAAe,WAAW,CAAC"}

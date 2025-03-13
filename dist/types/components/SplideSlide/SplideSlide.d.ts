@@ -4,5 +4,6 @@ import React, { JSX } from 'react';
  *
  * @since 0.5.0
  */
-export declare const SplideSlide: React.FC<JSX.IntrinsicElements['li']>;
+declare const SplideSlide: React.FC<JSX.IntrinsicElements['li']>;
+export default SplideSlide;
 //# sourceMappingURL=../../../../src/js/components/SplideSlide/SplideSlide.d.ts.map

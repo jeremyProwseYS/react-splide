@@ -1,6 +1,12 @@
 import Splide, { ComponentConstructor, Options } from "@splidejs/splide";
 import React, { DOMAttributes, HTMLAttributes } from "react";
-import { SplideEventHandlers } from "@/types/events";
+import { SplideEventHandlers } from "../types/events";
+export interface SplideRef {
+    getSlides: (splideInstance: Splide) => HTMLElement[];
+    sync: (_splide: Splide) => void;
+    go: (control: number | string) => void;
+    splide: Splide | null;
+}
 /**
  * Properties of the Splide component.
  *
@@ -13,7 +19,6 @@ export interface SplideProps extends SplideHTMLAttributes, Partial<SplideEventHa
     extensions?: Record<string, ComponentConstructor>;
     transition?: ComponentConstructor;
     children?: React.ReactNode;
-    ref?: React.RefObject<Splide>;
 }
 /**
  * Excludes event handlers used in Splide.

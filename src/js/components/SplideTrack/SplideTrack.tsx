@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { classNames } from '@/utils';
+import { classNames } from '../../utils';
 
 /**
  * The component for the track element.
@@ -15,3 +15,5 @@ export const SplideTrack: React.FC<JSX.IntrinsicElements['div']> = ({ children, 
     </div>
   );
 };
+
+export default SplideTrack;

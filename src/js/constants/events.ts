@@ -16,6 +16,7 @@ import {
   EVENT_MOUNTED,
   EVENT_MOVE,
   EVENT_MOVED,
+  EVENT_OVERFLOW,
   EVENT_NAVIGATION_MOUNTED,
   EVENT_PAGINATION_MOUNTED,
   EVENT_PAGINATION_UPDATED,
@@ -35,6 +36,7 @@ import { SplideEventHandlerMap } from "../types";
 export const EVENTS: Array<[keyof EventMap, keyof SplideEventHandlerMap]> = [
   [EVENT_MOUNTED, "onMounted"],
   [EVENT_READY, "onReady"],
+  [EVENT_OVERFLOW, "onOverflow"],
   [EVENT_MOVE, "onMove"],
   [EVENT_MOVED, "onMoved"],
   [EVENT_CLICK, "onClick"],

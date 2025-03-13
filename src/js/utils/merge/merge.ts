@@ -1,5 +1,5 @@
-import { forOwn } from "@/utils/forOwn/forOwn";
-import { isObject } from "@/utils/isObject/isObject";
+import { forOwn } from "../forOwn/forOwn";
+import { isObject } from "../isObject/isObject";
 
 /**
  * Merges U to T.

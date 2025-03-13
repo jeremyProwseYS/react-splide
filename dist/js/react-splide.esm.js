@@ -1,3 +1,7 @@
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
 // node_modules/@splidejs/splide/dist/js/splide.esm.js
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -2568,12 +2572,13 @@ Splide.defaults = {};
 Splide.STATES = STATES;
 
 // src/js/components/Splide/Splide.tsx
-import React2, { useEffect, useRef, useState } from "react";
+import React2 from "react";
 
 // src/js/constants/events.ts
 var EVENTS = [
   [EVENT_MOUNTED, "onMounted"],
   [EVENT_READY, "onReady"],
+  [EVENT_OVERFLOW, "onOverflow"],
   [EVENT_MOVE, "onMove"],
   [EVENT_MOVED, "onMoved"],
   [EVENT_CLICK, "onClick"],
@@ -2668,94 +2673,166 @@ import React from "react";
 var SplideTrack = ({ children: children2, className, ...props }) => {
   return /* @__PURE__ */ React.createElement("div", { className: classNames("splide__track", className), ...props }, /* @__PURE__ */ React.createElement("ul", { className: "splide__list" }, children2));
 };
+var SplideTrack_default = SplideTrack;
 
 // src/js/components/Splide/Splide.tsx
-var Splide2 = (props) => {
-  const { options, extensions, transition, className, tag: Root = "div", hasTrack = true, children: children2, ...restProps } = props;
-  const splideRef = useRef(null);
-  const [splide, setSplide] = useState(void 0);
-  const [currentOptions, setCurrentOptions] = useState(void 0);
-  const [slides, setSlides] = useState([]);
-  useEffect(() => {
-    const { current } = splideRef;
+var Splide2 = class extends React2.Component {
+  constructor() {
+    super(...arguments);
+    /**
+     * The RefObject for the Splide root element.
+     */
+    __publicField(this, "splideRef", React2.createRef());
+    /**
+     * Holds the Splide instance.
+     */
+    __publicField(this, "splide");
+    /**
+     * Holds current options to compare with new ones.
+     */
+    __publicField(this, "options");
+    /**
+     * Holds the latest slides to compare with new ones.
+     */
+    __publicField(this, "slides", []);
+  }
+  /**
+   * Called when the component is mounted.
+   */
+  componentDidMount() {
+    const { options, extensions, transition } = this.props;
+    const { current } = this.splideRef;
     if (current) {
-      const newSplide = new Splide(current, options);
-      bind(newSplide);
-      newSplide.mount(extensions, transition);
-      if (props.ref) {
-        props.ref.current = newSplide;
-      }
-      setSplide(newSplide);
-      setCurrentOptions(merge2({}, options || {}));
-      setSlides(getSlides(newSplide));
+      this.splide = new Splide(current, options);
+      this.bind(this.splide);
+      this.splide.mount(extensions, transition);
+      this.options = merge2({}, options || {});
+      this.slides = this.getSlides();
     }
-    return () => {
-      if (splide) {
-        splide.destroy();
-        setSplide(void 0);
-      }
-      setCurrentOptions(void 0);
-      setSlides([]);
-    };
-  }, []);
-  useEffect(() => {
-    if (!splide) {
+  }
+  /**
+   * Destroys the splide instance.
+   */
+  componentWillUnmount() {
+    if (this.splide) {
+      this.splide.destroy();
+      this.splide = void 0;
+    }
+    this.options = void 0;
+    this.slides.length = 0;
+  }
+  /**
+   * Updates and/or refreshes the splide when the component is updated.
+   */
+  componentDidUpdate() {
+    if (!this.splide) {
       return;
     }
-    if (options && !isEqualDeep(currentOptions, options)) {
-      splide.options = options;
-      setCurrentOptions(merge2({}, options));
+    const { options } = this.props;
+    if (options && !isEqualDeep(this.options, options)) {
+      this.splide.options = options;
+      this.options = merge2({}, options);
     }
-    const newSlides = getSlides(splide);
-    if (!isEqualShallow(slides, newSlides)) {
-      splide.refresh();
-      setSlides(newSlides);
+    const newSlides = this.getSlides();
+    if (!isEqualShallow(this.slides, newSlides)) {
+      this.splide.refresh();
+      this.slides = newSlides;
     }
-  }, [options, slides, splide]);
-  const getSlides = (splideInstance) => {
+  }
+  /**
+   * Adds a splide instance to sync with.
+   *
+   * @param splide - A Splide instance.
+   */
+  sync(splide) {
     var _a;
-    const children3 = (_a = splideInstance.Components.Elements) == null ? void 0 : _a.list.children;
-    return children3 ? Array.prototype.slice.call(children3) : [];
-  };
-  const bind = (splideInstance) => {
+    (_a = this.splide) == null ? void 0 : _a.sync(splide);
+  }
+  /**
+   * Moves the slider by the specified control pattern.
+   *
+   * @see Splide#go()
+   *
+   * @param control - A control pattern.
+   */
+  go(control) {
+    var _a;
+    (_a = this.splide) == null ? void 0 : _a.go(control);
+  }
+  /**
+   * Returns an array with slide elements.
+   *
+   * @return An array with slide elements.
+   */
+  getSlides() {
+    var _a;
+    if (this.splide) {
+      const children2 = (_a = this.splide.Components.Elements) == null ? void 0 : _a.list.children;
+      return children2 && Array.prototype.slice.call(children2) || [];
+    }
+    return [];
+  }
+  /**
+   * Binds event handlers to the splide instance.
+   *
+   * @param splide - A splide instance.
+   */
+  bind(splide) {
     EVENTS.forEach(([event, name]) => {
-      const handler = props[name];
+      const handler = this.props[name];
       if (typeof handler === "function") {
-        splideInstance.on(event, (...args) => {
-          handler(splideInstance, ...args);
+        splide.on(event, (...args) => {
+          handler(splide, ...args);
         });
       }
     });
-  };
-  const omit2 = (props2, keys) => {
-    const result = { ...props2 };
+  }
+  /**
+   * Omits specified keys from props.
+   *
+   * @param props - An object with props.
+   * @param keys  - An array with keys to omit.
+   *
+   * @return An object with props without specified keys.
+   */
+  omit(props, keys) {
     keys.forEach((key) => {
-      if (Object.prototype.hasOwnProperty.call(result, key)) {
-        delete result[key];
+      if (Object.prototype.hasOwnProperty.call(props, key)) {
+        delete props[key];
       }
     });
-    return result;
-  };
-  return /* @__PURE__ */ React2.createElement(
-    Root,
-    {
-      className: classNames("splide", className),
-      ref: splideRef,
-      ...omit2(restProps, ["options", "ref", ...EVENTS.map((event) => event[1])])
-    },
-    hasTrack ? /* @__PURE__ */ React2.createElement(SplideTrack, null, children2) : children2
-  );
+    return props;
+  }
+  /**
+   * Render the splide carousel elements.
+   *
+   * @return A root node.
+   */
+  render() {
+    const { className, tag: Root = "div", hasTrack = true, children: children2, ...props } = this.props;
+    return /* @__PURE__ */ React2.createElement(
+      Root,
+      {
+        className: classNames("splide", className),
+        ref: this.splideRef,
+        ...this.omit(props, ["options", ...EVENTS.map((event) => event[1])])
+      },
+      hasTrack ? /* @__PURE__ */ React2.createElement(SplideTrack, null, children2) : children2
+    );
+  }
 };
+var Splide_default = Splide2;
 
 // src/js/components/SplideSlide/SplideSlide.tsx
 import React3 from "react";
 var SplideSlide = ({ children: children2, className, ...props }) => {
   return /* @__PURE__ */ React3.createElement("li", { className: classNames("splide__slide", className), ...props }, children2);
 };
+var SplideSlide_default = SplideSlide;
 export {
-  Splide2 as Splide,
-  SplideSlide,
-  SplideTrack
+  Splide_default as Splide,
+  SplideSlide_default as SplideSlide,
+  SplideTrack_default as SplideTrack
 };
 /*! Bundled license information:
 

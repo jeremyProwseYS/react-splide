@@ -10,12 +10,9 @@
     "declarationDir": "./dist/types",
     "declaration": true,
     "declarationMap": true,
+    "outDir": "dist/types/",
     "lib": ["dom", "es6"],
-    "jsx": "react",
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["js/*"]
-    }
+    "jsx": "react"
   },
   "include": ["src/js/**/*.ts"],
   "exclude": ["node_modules", "src/**/*.test.ts"]

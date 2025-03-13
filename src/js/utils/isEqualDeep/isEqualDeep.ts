@@ -1,4 +1,4 @@
-import { isObject } from "@/utils/isObject/isObject";
+import { isObject } from "../isObject/isObject";
 
 /**
  * Checks if provided two arrays are shallowly equal or not.

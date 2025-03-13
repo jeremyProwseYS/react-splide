@@ -22,6 +22,7 @@ export type SplideEventHandlerMap = {
   onDestroy: "destroy";
   onArrowsMounted: "arrows:mounted";
   onArrowsUpdated: "arrows:updated";
+  onOverflow: "overflow";
   onPaginationMounted: "pagination:mounted";
   onPaginationUpdated: "pagination:updated";
   onNavigationMounted: "navigation:mounted";
