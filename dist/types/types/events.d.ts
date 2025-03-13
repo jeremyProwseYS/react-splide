@@ -1,4 +1,4 @@
-import { EventMap, Splide } from "@splidejs/splide";
+import { EventMap } from "@splidejs/splide";
 export type SplideEventHandlerMap = {
     onMounted: "mounted";
     onReady: "ready";
@@ -31,6 +31,6 @@ export type SplideEventHandlerMap = {
     onLazyLoadLoaded: "lazyload:loaded";
 };
 export type SplideEventHandlers = {
-    [K in keyof SplideEventHandlerMap]: (splide: Splide, ...args: Parameters<EventMap[SplideEventHandlerMap[K]]>) => ReturnType<EventMap[SplideEventHandlerMap[K]]>;
+    [K in keyof SplideEventHandlerMap]: (...args: Parameters<EventMap[SplideEventHandlerMap[K]]>) => ReturnType<EventMap[SplideEventHandlerMap[K]]>;
 };
 //# sourceMappingURL=../../../src/js/types/events.d.ts.map

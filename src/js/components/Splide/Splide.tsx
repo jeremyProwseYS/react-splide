@@ -137,9 +137,7 @@ class Splide extends React.Component<SplideProps> {
       const handler: AnyFunction | undefined = this.props[name];
 
       if (typeof handler === 'function') {
-        splide.on(event, (...args: any[]) => {
-          handler(splide, ...args);
-        });
+        splide.on(event, handler);
       }
     });
   }

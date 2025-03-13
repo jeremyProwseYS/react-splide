@@ -7,7 +7,7 @@
 // ///////////////////////////////////////////////////////////////
 
 // Core
-import { Options, Splide as SplideCore } from '@splidejs/splide';
+import { AnyFunction, Options, Splide as SplideCore } from '@splidejs/splide';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 // Constants
@@ -80,23 +80,20 @@ const Splide: React.FC<SplideProps> = (props) => {
     return children ? Array.prototype.slice.call(children) : [];
   };
 
-  const sync = (_splide: SplideCore): void => {
-    splide?.sync(_splide);
+  const sync = (splideInstance: SplideCore): void => {
+    splide?.sync(splideInstance);
   }
 
   const go = (control: number | string): void => {
-    console.log('go', control, splide)
     splide?.go(control);
   }
 
   const bind = (splideInstance: SplideCore): void => {
     EVENTS.forEach(([event, name]) => {
-      const handler = props[name];
+      const handler: AnyFunction | undefined = props[name];
 
       if (typeof handler === 'function') {
-        splideInstance.on(event, (...args: any[]) => {
-          handler(splideInstance, ...args);
-        });
+        splideInstance.on(event, handler);
       }
     });
   };

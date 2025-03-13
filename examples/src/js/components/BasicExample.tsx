@@ -16,12 +16,8 @@ export const BasicExample: React.FC = () => {
           gap: '1rem',
         }}
         aria-labelledby="basic-example-heading"
-        onMoved={(splide, newIndex) => {
-          // eslint-disable-next-line
+        onMoved={(newIndex) => {
           console.log('moved', newIndex);
-
-          // eslint-disable-next-line
-          console.log('length', splide.length);
         }}
       >
         {generateSlides().map(slide => (

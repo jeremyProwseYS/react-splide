@@ -8,6 +8,12 @@ export const ReactivityExample: React.FC = () => {
   const [perPage, setPerPage] = useState(2);
   const [height, setHeight] = useState(10);
 
+  const options = {
+    height: `${height}rem`,
+    perPage,
+    gap,
+  }
+
   return (
     <div className="wrapper">
       <h2 id="reactivity-example-heading">Reactivity Example</h2>
@@ -50,7 +56,7 @@ export const ReactivityExample: React.FC = () => {
       </div>
 
       <Splide
-        options={{ perPage, height: `${height}rem`, gap }}
+        options={options}
         aria-labelledby="reactivity-example-heading"
       >
         {generateSlides().map(slide => (

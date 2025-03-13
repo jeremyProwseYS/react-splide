@@ -34,7 +34,7 @@ export type SplideEventHandlerMap = {
 
 export type SplideEventHandlers = {
   [K in keyof SplideEventHandlerMap]: (
-    splide: Splide,
+    // splide: Splide,
     ...args: Parameters<EventMap[SplideEventHandlerMap[K]]>
   ) => ReturnType<EventMap[SplideEventHandlerMap[K]]>;
 };

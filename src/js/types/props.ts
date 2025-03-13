@@ -23,6 +23,9 @@ export interface SplideProps
   extensions?: Record<string, ComponentConstructor>;
   transition?: ComponentConstructor;
   children?: React.ReactNode;
+
+  // Ref is only used for the hooks version.
+  // ref?: React.RefObject<SplideRef> | React.RefObject<HTMLDivElement> | null;
 }
 
 /**

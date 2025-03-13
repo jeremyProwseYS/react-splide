@@ -2781,9 +2781,7 @@ var Splide2 = class extends React2.Component {
     EVENTS.forEach(([event, name]) => {
       const handler = this.props[name];
       if (typeof handler === "function") {
-        splide.on(event, (...args) => {
-          handler(splide, ...args);
-        });
+        splide.on(event, handler);
       }
     });
   }
